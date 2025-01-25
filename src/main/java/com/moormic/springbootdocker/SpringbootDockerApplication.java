@@ -11,6 +11,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @SpringBootApplication
 public class SpringbootDockerApplication {
+	private static final String FILENAME = "/app/data/test.txt";
+//	private static final String FILENAME = "C:\\Users\\mmoor\\Developer\\k8s-tutorial\\test.txt";
 	private static final Integer LIMIT = 1_000_000;
 
 	public static void main(String[] args) {
@@ -21,14 +23,14 @@ public class SpringbootDockerApplication {
 	private static void populateFile() {
 		var counter = new AtomicInteger(0);
 		try {
-			var writer = new BufferedWriter(new FileWriter("/app/data/test.txt"));
+			var writer = new BufferedWriter(new FileWriter(FILENAME));
 			while (counter.get() < LIMIT) {
-				writer.write(String.format("%d: %s", counter.getAndIncrement(), UUID.randomUUID()));
+				writer.write(String.format("%d: %s\n", counter.incrementAndGet(), UUID.randomUUID()));
+				writer.flush();
 			}
+			writer.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
-
-	//TODO: Create a runner that writes to a file, and have that file mounted to the pod via NFS in civo k8s
 }
