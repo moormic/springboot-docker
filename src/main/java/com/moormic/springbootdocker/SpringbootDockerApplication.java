@@ -30,7 +30,6 @@ public class SpringbootDockerApplication {
 			var writer = new BufferedWriter(new FileWriter(FILENAME, true));
 			while (counter.get() < LIMIT) {
 				var message = String.format("%d: %s\n", counter.incrementAndGet(), UUID.randomUUID());
-//				System.out.printf(message);
 				writer.write(message);
 				writer.flush();
 			}
