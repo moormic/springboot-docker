@@ -26,7 +26,7 @@ spec:
             privileged: true
           volumeMounts:
             - name: storage
-              mountPath: /exports
+              mountPath: /nfs
       volumes:
         - name: storage
           hostPath:

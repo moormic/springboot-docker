@@ -17,4 +17,4 @@ spec:
     - name: data
       nfs:
         server: "10.43.155.114"  # change this to CLUSTER-IP of NFS service
-        path: "/app" # "app" folder must exist inside "/exports" directory of NFS server
+        path: "/data" # "app" folder must exist inside "/nfs" directory of NFS server
