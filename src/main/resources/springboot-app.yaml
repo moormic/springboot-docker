@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: kata-app
+  namespace: kata
+spec:
+  containers:
+  - name: springboot
+    image: moormic/springboot-docker:2.3.0
+    volumeMounts:
+    - name: data
+      mountPath: /app/data
+  volumes:
+  - name: data
+    nfs:
+      server: "10.43.71.198"  # change this to CLUSTER-IP of NFS service
+      path: "/app" # "app" folder must exist inside "/exports" directory of NFS server
