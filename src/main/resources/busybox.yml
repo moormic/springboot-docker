@@ -1,0 +1,20 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: busybox
+  namespace: kata
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command:
+        - sleep
+        - "3600"
+      volumeMounts:
+        - name: data
+          mountPath: /app/data
+  volumes:
+    - name: data
+      nfs:
+        server: "10.43.155.114"  # change this to CLUSTER-IP of NFS service
+        path: "/app" # "app" folder must exist inside "/exports" directory of NFS server
