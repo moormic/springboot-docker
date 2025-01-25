@@ -21,11 +21,14 @@ public class SpringbootDockerApplication {
 	}
 
 	private static void populateFile() {
+		System.out.println("Writing to " + FILENAME);
 		var counter = new AtomicInteger(0);
 		try {
-			var writer = new BufferedWriter(new FileWriter(FILENAME));
+			var writer = new BufferedWriter(new FileWriter(FILENAME, true));
 			while (counter.get() < LIMIT) {
-				writer.write(String.format("%d: %s\n", counter.incrementAndGet(), UUID.randomUUID()));
+				var message = String.format("%d: %s\n", counter.incrementAndGet(), UUID.randomUUID());
+				System.out.println(message);
+				writer.write(message);
 				writer.flush();
 			}
 			writer.close();
