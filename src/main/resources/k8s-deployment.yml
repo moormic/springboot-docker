@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot
+  namespace: kata
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      project: springboot
+  template:
+    metadata:
+      labels:
+        project: springboot
+    spec:
+      containers:
+        - name: springboot
+          image: moormic/springboot-docker:1.0.0
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
